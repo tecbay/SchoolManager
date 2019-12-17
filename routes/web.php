@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@welcome');
+
+Auth::routes(['register' => false]);
+
+
+Route::group(['middleware' => ['auth']], function () {
+    
+    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+
 });
